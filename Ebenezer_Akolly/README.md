@@ -1,2 +1,0 @@
-# Ebenezer Akolly
-## Assistance Received
