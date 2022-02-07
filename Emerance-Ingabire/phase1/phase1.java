@@ -7,6 +7,9 @@ public class phase1{
 	public static List<List<String>> courseDetails = new ArrayList<List<String>>();
 	public static List<List<String>> assignmentDetails = new ArrayList<List<String>>();
 	public static List<List<String>> submissionDetails = new ArrayList<List<String>>();
+	public static List<List<String>> scoreDetails = new ArrayList<List<String>>();
+	
+	
 	
 
     public static ArrayList<String> emails = new ArrayList<String>();
@@ -42,6 +45,12 @@ public class phase1{
     public static ArrayList<String> submitCourseCode= new ArrayList<String>();
     public static ArrayList<String> submitName= new ArrayList<String>();
     public static ArrayList<String> submissionStatus = new ArrayList<String>();
+    
+    public static ArrayList<String> scoreCourseCode = new ArrayList<String>();
+    public static ArrayList<String> scoreAssignmentName = new ArrayList<String>();
+    public static ArrayList<String> scoreSubmitterEmail= new ArrayList<String>();
+    public static ArrayList<String> courseScore= new ArrayList<String>();
+    
     
     
     
@@ -448,14 +457,62 @@ public static void viewSubmissions() {
 }
 
 public static void scoreAssignment() {
+	if(login() == true && isFaculty() == true) {
+		System.out.println("------Scoring page--------");
+		System.out.println("Enter your user email:");
+		String checkEmail = course.nextLine();
+		
+		if(courseDetails.get(2).contains(checkEmail)) {
+			System.out.println("Enter your course code:");
+			scoreCourseCode.add(course.nextLine());
+			scoreDetails.add(scoreCourseCode);// courseCode @----index 0
+			
+			System.out.println("Enter the course name: ");
+		    scoreAssignmentName.add(course.nextLine());
+		    scoreDetails.add(scoreAssignmentName);// assignmentName @----index 1
+		    
+		    System.out.println("Enter the email of submitter: ");
+		    scoreSubmitterEmail.add(course.nextLine());
+		    scoreDetails.add(scoreSubmitterEmail); // email of submitter @ -----index 2
+		    
+		    System.out.println("Enter the score: ");
+		    courseScore.add(course.nextLine());
+		    scoreDetails.add(courseScore);// score of the assignment @ ----index 3
+		}
+			
+		}
 	
 }
 
 public static void ViewAssignmentScore() {
+	System.out.println("------Viewing scoring page--------");
+	if(login() == true ) {
+		System.out.println("Enter course code: ");
+		String searchCourseCode = course.nextLine();
+		
+		System.out.println("Enter assignment name: ");
+		String searchAssignName = course.nextLine();
+		
+		int detailsIndex = scoreDetails.get(0).indexOf(searchCourseCode);
+		
+		System.out.println("Your score is " +scoreDetails.get(3).get(detailsIndex));
+			
+	}	
 	
 }
 
 public static void viewAssignmentScores() {
+	if(login() == true && isFaculty() == true) {
+		System.out.println("------Scoring page--------");
+		System.out.println("Enter your user email:");
+		String checkEmail = course.nextLine();
+		
+		if(courseDetails.get(2).contains(checkEmail)) {
+			for(int i = 0; i<= scoreDetails.get(1).size(); i++) {
+				
+			}
+				
+		}
 	
 }
 
@@ -478,6 +535,8 @@ public static void viewStudentAssignmentGrades() {
 public static void viewStudentAssignmentScores() {
 	
 }
+
+
 public static void setNotificationPreferences() {
 	
 	System.out.println("For the following questions, type yes or no");
@@ -505,7 +564,7 @@ public static void setNotificationPreferences() {
 	System.out.println("Would you like to receive an email for a successfully registed course?");
 	String notifyRegister = notificationActivation.nextLine();
 	
-	if(notifyRegister.equalsIgnoreCase("yes"){
+	if(notifyRegister.equalsIgnoreCase("yes")){
         System.out.println("You will receive emails for new registerations");
     }
     else{
