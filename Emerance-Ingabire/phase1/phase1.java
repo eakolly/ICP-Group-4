@@ -51,6 +51,9 @@ public class phase1{
     public static ArrayList<String> scoreSubmitterEmail= new ArrayList<String>();
     public static ArrayList<String> courseScore= new ArrayList<String>();
     
+    public static ArrayList<String> viewAssignmentEmails  = new ArrayList<String>();
+    public static ArrayList<String> viewAssignmentEmails  = new ArrayList<String>();
+    
     
     
     
@@ -414,7 +417,8 @@ public static void viewAssignmentByEmail() {
 
 public static void submitAssignment() {
 	if(login() == true) {
-System.out.println("....submission portal.....");
+		
+		System.out.println("....submission portal.....");
 		
 		System.out.println("Enter your email:");
 		submitEmail.add(course.nextLine());
@@ -503,20 +507,62 @@ public static void ViewAssignmentScore() {
 
 public static void viewAssignmentScores() {
 	if(login() == true && isFaculty() == true) {
-		System.out.println("------Scoring page--------");
+		System.out.println("------view Assignment Scores Page--------");
 		System.out.println("Enter your user email:");
 		String checkEmail = course.nextLine();
 		
 		if(courseDetails.get(2).contains(checkEmail)) {
-			for(int i = 0; i<= scoreDetails.get(1).size(); i++) {
+			System.out.println("Enter course code: ");
+			String searchCourseCode = course.nextLine();
+			
+			System.out.println("Enter assignment name: ");
+			String searchAssignName = course.nextLine();
+			
+		
+			for(int i = 0; i<= registerCourseCode.size(); i++) {
+				if(searchCourseCode.equals(registerCourseCode.get(i))) {
+					viewAssignmentEmails.add(registerCourseEmail.get(i));
+					
+				}
 				
 			}
+			
+			for (int j = 0; j <= viewAssignmentEmails.size(); j++) {
+				int detailsIndex = scoreDetails.get(2).indexOf(viewAssignmentEmails.get(j));
 				
+				System.out.println("Email of student: "+scoreDetails.get(2).get(detailsIndex));
+				System.out.println("Name of the assignment: "+scoreDetails.get(1).get(detailsIndex));
+				System.out.println("The score of the assignment: "+scoreDetails.get(3).get(detailsIndex));
+				
+				
+				
+			}
+			
 		}
+		
+	}
 	
 }
 
 public static void viewAllAssignmentScores() {
+	if(login() == true && isFaculty() == true) {
+		System.out.println("------view All Assignment Scores Page--------");
+		System.out.println("Enter your user email:");
+		String checkEmail = course.nextLine();
+		
+		if(courseDetails.get(2).contains(checkEmail)) {
+			System.out.println("Enter course code: ");
+			String searchCourseCode = course.nextLine();
+			
+			System.out.println("Enter assignment name: ");
+			String searchAssignName = course.nextLine();
+			
+			for (int j = 0; j <= scoreDetails.get(2).size(); j++) {
+				int detailsIndex = scoreDetails.get(2).indexOf(checkEmail);
+				
+				System.out.println("Email of student: "+scoreDetails.get(2).get(detailsIndex));
+				System.out.println("Name of the assignment: "+scoreDetails.get(1).get(detailsIndex));
+				System.out.println("The score of the assignment: "+scoreDetails.get(3).get(detailsIndex));
 	
 }
 
@@ -528,13 +574,10 @@ public static void viewAssignmentGrades() {
 	
 }
 
-public static void viewStudentAssignmentGrades() {
+public static void viewAllAssignmentGrades() {
 	
 }
 
-public static void viewStudentAssignmentScores() {
-	
-}
 
 
 public static void setNotificationPreferences() {
@@ -586,11 +629,7 @@ public static void setNotificationPreferences() {
 		
 
     public static void main(String[]args){
-        //createAccount();
-        //login();
-        //updateProfile();
-        //viewProfile();
-    	isAdmin();
+        
         
 
     }
