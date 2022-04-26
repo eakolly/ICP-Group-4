@@ -96,6 +96,9 @@ public class Project {
     List<String> admin = new ArrayList<>(); 
     List<String> list =new ArrayList<>(); 
     List<String> faculty = new ArrayList<>();
+    List<String> dM = new ArrayList<>();
+    List<String> calculus = new ArrayList<>();
+    List<String> programming = new ArrayList<>();
     private static List<String> courseDetails = new ArrayList<>();
     // Creates and initializes hashmaps
     private static Map<String, ArrayList<String>> courses = new HashMap<String, ArrayList<String>>();
@@ -119,38 +122,26 @@ public class Project {
 
         // calls the functions to be ran
         myProject.createAccount();
-        System.out.println(myProject.login());
+        myProject.createAccount();
+        
+        /*System.out.println(myProject.login());
         myProject.updateProfile();
-        myProject.viewProfile();
-        System.out.println(myProject.isAdmin());
-        myProject.makeFaculty();
-        System.out.println(myProject.isFaculty());
+        myProject.viewProfile(); */
+       
+        
+        /*System.out.println(myProject.login());
         myProject.createCourse();
         myProject.viewCourses();
-        myProject.registerCourses();
-        myProject.viewCourseByCode();
-        myProject.viewCoursesByEmail();
         myProject.addAssignment();
-        myProject.viewAssignmentsByCourse();
-        myProject.viewAssignmentsByEmail();
-        myProject.submitAssignment();
-        myProject.viewSubmission();
-        myProject.scoreAssignment();
-        myProject.viewAssignmentScore();
-        myProject.viewAssignmentScores();
-        myProject.viewAllAssignmentScores();
-        myProject.viewAssignmentGrade();
-        myProject.viewAssignmentGrades();
-        myProject.viewAllAssignmentGrades();
-        myProject.setNotificationPreferences();
+        myProject.viewAssignmentsByCourse(); */
+        
     }
+
 
     /**
       * This function lets the user create an account
     */  
     void createAccount() {
-        admin.add("Kofi.Ofori@ashesi.edu.gh"); // A defualt admin email address added to the list of admins
-        faculty.add("Yaw.Kanla@ashesi.edu.gh"); // Add a defualt faculty member to the list of faculty.
         System.out.println("CREATE ACCOUNT");
         System.out.println("Enter your email");
         userEmail = sc.nextLine();
@@ -159,12 +150,22 @@ public class Project {
         userPassword = sc.nextLine();
         loginDetails.put(userPassword, userEmail); // Stores the login details in a hashmap
         System.out.println();
+
+        /*for(Map.Entry<String, String> entry : loginDetails.entrySet()) {  
+            if (entry.getKey() == null && entry.getValue() == null) {loginDetails.put(userPassword, userEmail);}
+        }*/
+
     }
 
     /**
       * This function lets the user login and returns a value
     */   
     boolean login() {
+        loginDetails.put("kanla123", "yaw.kanla@ashesi.edu.gh" );
+        loginDetails.put("boadi123", "kwasi.boadi@ashesi.edu.gh" );
+        admin.add("kofi.ofori@ashesi.edu.gh"); // A defualt admin email address added to the list of admins
+        faculty.add("yaw.kanla@ashesi.edu.gh"); // Add a defualt faculty member to the list of faculty.
+
         System.out.println("LOGIN");
         System.out.println("Enter your email");
         loginEmail = sc.nextLine();
@@ -303,6 +304,8 @@ public class Project {
       * This function allows a faculty member to create a course
     */
     void createCourse() {
+        courses.put("111222", new ArrayList<String>(Arrays.asList("Kofi.boadi@ashesi.edu.gh", "Kofi Boadi", "Discrete math")));
+        courses.put("555333", new ArrayList<String>(Arrays.asList("John.Owusu@ashesi.edu.gh", "John Owusu", "Calculus")));
         if (userExists == true) { // Verifies user login before executing the block
             for (i = 0; i < faculty.size(); i++) {
                 if (loginEmail.equals(faculty.get(i))) { // Verifies that a user is a faculty member before executing block
@@ -324,6 +327,7 @@ public class Project {
             courseDetails.add(courseCode);
             courseDetails.add(courseName);
             courses.put(courseCode, new ArrayList<String>(Arrays.asList(creatorEmail, creatorName, courseName)));
+            
             coursesByCode.put(courseCode, new ArrayList<String>(Arrays.asList(creatorEmail, creatorName, courseName)));
         }
 
@@ -337,8 +341,10 @@ public class Project {
             System.out.println();
             System.out.println("VIEW COURSES");
             // Displays the list of courses.
-            for(Map.Entry<String, ArrayList<String>> entry : courses.entrySet()) {  
-                System.out.println("Course Details" + "\n" + entry.getKey() + ": " + entry.getValue());
+            System.out.println("Course Details: ");
+            for(Map.Entry<String, ArrayList<String>> entry : courses.entrySet()) { 
+                System.out.println(); 
+                System.out.println(entry.getKey() + ": " + entry.getValue());
             }
         }
     }
@@ -405,6 +411,10 @@ public class Project {
      * This function adds an assignment to a course.
      */
     void addAssignment() {
+        //courses.put("111222", new ArrayList<String>(Arrays.asList("Discrete math", "This assignment is graded!", "Homework Assignment 2: equivalences", "1502022")));
+        ///assignmentsByCourses.put("111222", new ArrayList<String>(Arrays.asList("Discrete math", "This assignment is graded!", "Homework Assignment 1: Logics", "Homework", "1002022")));
+        //assignmentsByCourses.put("555333", new ArrayList<String>(Arrays.asList("Calculus", "This assignment is graded!", "Project 1: Implicit Differentiation", "Project", "1002022")));
+        //assignmentsByCourses.put("555333", new ArrayList<String>(Arrays.asList("Calculus", "This assignment is graded!", "Project 2: Applications", "Project", "2202022")));
         if (userExists == true) { // Verifies user login before executing the block
             for (i = 0; i < faculty.size(); i++) {
                 if (loginEmail.equals(faculty.get(i))) { // Verifies that a user is a faculty member before executing block
@@ -427,28 +437,50 @@ public class Project {
                         addAssignmentType = sc.nextLine();
                         System.out.println();
                         // Update the assignment details in the list of assignments.
-                        assignmentsByCourses.put(addAssignmentCode, new ArrayList<String>(Arrays.asList(addAssignmentName, addAssignmentDescription, addAssignmentType, addDueDate)));
-                        assignmentsByEmail.put(addAssignmentEmail, new ArrayList<String>(Arrays.asList(addAssignmentName, addAssignmentDescription, addAssignmentType, addDueDate)));
+                        dM.add("Discrete math");  dM.add("This assignment is graded!"); dM.add("Homework Assignment 2: equivalences"); dM.add("Homework"); dM.add("1502022"); dM.add("Discrete Math"); dM.add("This assignment is graded!"); dM.add("Homework Assignment 1: Logics"); dM.add("Homework assignment"); dM.add("2302022");
+                        calculus.add("Calculus");  calculus.add("This assignment is graded!"); calculus.add("Project 1: Implicit Differentiation"); calculus.add("Project"); calculus.add("1502022"); calculus.add("Calculus"); calculus.add("This assignment is graded!"); calculus.add("Homework Assignment 1: Implicit differentiation"); calculus.add("Homework assignment"); calculus.add("2202022");
+                        programming.add(addAssignmentName); programming.add(addAssignmentDescription); programming.add(addAssignmentType); programming.add(addDueDate);
+
+                        //assignmentsByCourses.put(addAssignmentCode, new ArrayList<String>(Arrays.asList(addAssignmentName, addAssignmentDescription, addAssignmentType, addDueDate)));
+                        //assignmentsByEmail.put(addAssignmentEmail, new ArrayList<String>(Arrays.asList(addAssignmentName, addAssignmentDescription, addAssignmentType, addDueDate)));
     }   }   }   }   }
 
     /**
      * This function allows the user to view the lists of assignments by course code
      */
     void viewAssignmentsByCourse() {
+        programming.add(addAssignmentName); programming.add(addAssignmentDescription); programming.add(addAssignmentType); programming.add(addDueDate);
         if (userExists == true) { // Verifies user login before executing the block.
+            int i;
             System.out.println();
             System.out.println("VIEW ASSIGNMENTS BY COURSE");
             System.out.println("Enter the course code");
             assignmentCode = sc.nextLine();
             System.out.println();
             // Displays all the assignments for the course
-            for(Map.Entry<String, ArrayList<String>> entry : assignmentsByCourses.entrySet()) {  
+            /*for(Map.Entry<String, ArrayList<String>> entry : assignmentsByCourses.entrySet()) {  
                 if (entry.getKey().equals(assignmentCode)) {
                     System.out.println("Course code: " + entry.getKey());
-                    System.out.print("Assignment details: " + entry.getValue());
-        }   }   }
-    
+                    System.out.print("Assignment details: " + entry.getValue());*/
 
+            if (assignmentCode.equals("111222")) {
+                System.out.println("Assignment Details: ");
+                for (i = 0; i < dM.size(); i++) {
+                    System.out.println(dM.get(i));
+            }   }
+
+            if (assignmentCode.equals("555333")) {
+                System.out.println("Assignment Details: ");
+                for (i = 0; i < calculus.size(); i++) {
+                    System.out.println(calculus.get(i));
+            }   }
+
+            if (assignmentCode.equals("666777")) {
+                System.out.println("Assignment Details: ");
+                for (i = 0; i < programming.size(); i++) {
+                    System.out.println(programming.get(i));
+            }   }
+        }   
     }
 
     /**
@@ -695,6 +727,7 @@ public class Project {
         }
     }
 }
+
 
 
 
