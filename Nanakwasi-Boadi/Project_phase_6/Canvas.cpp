@@ -199,7 +199,7 @@ class Admin : public Student { // Inherits the Student class
 };
 #endif // _ADMIN_
 
-// A main method to test the program. All functions run as expected
+// A main method to test the program. All functions run as expected (tested on replit)
 int main() {
   Student myStudent; // Creaetes an objet for the Student class
   Admin myAdmin; // Creates an object for the Admin class
